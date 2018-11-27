@@ -4,8 +4,8 @@ const router = express.Router();
 function blockingMiddleware(req, res, next) {
   res.send({foo: "blocked"}).status(403);
 }
-
-router.get('/', blockingMiddleware, (req, res, next) => {
+router.use(blockingMiddleware);
+router.get('/', (req, res, next) => {
   res.json({
     foo: 'success'
   });
